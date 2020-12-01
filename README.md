@@ -8,3 +8,5 @@
 ## License
 
 - このページの内容: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.ja)
+- このページのソース: [MIT License](https://github.com/hikalium/wdb120_toy_browser_and_os_support/blob/main/LICENSE)
+  - Based on [jekyll/minima](https://github.com/jekyll/minima)
