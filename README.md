@@ -6,12 +6,22 @@
 
 本ページの内容に関するお問い合わせは、著者である[@hikalium](https://github.com/hikalium)および[@d0iasm](https://github.com/d0iasm)までお願いします。
 
+<h2><a href="#experiments">掲載されているコマンドの実行例</a></h2>
+
+TBA(ここにコマンドと画像を貼る)
+
+```
+command test 
+this is a test
+#include <something>
+```
+
 <h2><a href="#author">Author</a></h2>
 
 - 第1章-第3章: [@hikalium](https://github.com/hikalium)
 - 第4章-第5章: [@d0iasm](https://github.com/d0iasm)
 
-<h2><a href="#author">License</a></h2>
+<h2><a href="#license">License</a></h2>
 
 - このページの内容: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.ja)
 - このページのソース: [MIT License](https://github.com/hikalium/wdb120_toy_browser_and_os_support/blob/main/LICENSE)
