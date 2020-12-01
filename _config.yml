@@ -3,7 +3,9 @@ title: 自作OS×自作ブラウザで学ぶ Webページが表示されるま�
 show_excerpts: false
 minima:
   social_links:
-    twitter: hikalium
+    twitter:
+    - id: hikalium
+    - id: d0iasm
     github:
     - id: hikalium
     - id: d0iasm
