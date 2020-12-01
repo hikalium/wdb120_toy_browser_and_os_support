@@ -1,4 +1,8 @@
-# Web+DB Press Vol.120 ［自作OS×自作ブラウザで学ぶ］ Webページが表示されるまで サポートページ
+# 自作OS×自作ブラウザで学ぶ Webページが表示されるまで
+
+このページは、Web+DB Press Vol.120 に掲載されている記事「［自作OS×自作ブラウザで学ぶ］ Webページが表示されるまで」に関する補足情報をまとめたページです。
+
+本ページの内容に関するお問い合わせは、著者である[@hikalium](https://github.com/hikalium)および[@d0iasm](https://github.com/d0iasm)までお願いします。
 
 ## Author
 
