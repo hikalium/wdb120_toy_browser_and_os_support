@@ -20,13 +20,16 @@
   {%- if social.linkedin -%}<li><a rel="me" href="https://www.linkedin.com/in/{{ social.linkedin | cgi_escape | escape }}" title="{{ social.linkedin | escape }}"><svg class="svg-icon grey"><use xlink:href="{{ '/assets/minima-social-icons.svg#linkedin' | relative_url }}"></use></svg></a></li>{%- endif -%}
   {%- if social.pinterest -%}<li><a rel="me" href="https://www.pinterest.com/{{ social.pinterest | cgi_escape | escape }}" title="{{ social.pinterest | escape }}"><svg class="svg-icon grey"><use xlink:href="{{ '/assets/minima-social-icons.svg#pinterest' | relative_url }}"></use></svg></a></li>{%- endif -%}
   {%- for mst in social.mastodon -%}{%- if mst.username and mst.instance -%}<li><a rel="me" href="https://{{ mst.instance | cgi_escape | escape}}/@{{mst.username}}" title="{{ mst.username | escape }}"><svg class="svg-icon grey"><use xlink:href="{{ '/assets/minima-social-icons.svg#mastodon' | relative_url }}"></use></svg></a></li>{%- endif -%}{%- endfor -%}
-  {%- if social.twitter -%}
+  {%- for e in social.twitter -%}
+  {%- if e.id -%}
     <li>
-      <a rel="me" href="https://twitter.com/{{ social.twitter | cgi_escape | escape }}" title="{{ social.twitter | escape }}">
+      <a rel="me" href="https://twitter.com/{{ e.id | cgi_escape | escape }}" title="{{ e.id | escape }}">
         <svg class="svg-icon grey"><use xlink:href="{{ '/assets/minima-social-icons.svg#twitter' | relative_url }}"></use></svg>
-        {{ social.twitter | escape }}
+        @{{ e.id | escape }}
       </a>
-  </li>{%- endif -%}
+    </li>
+  {%- endif -%}
+  {%- endfor -%}
   {%- if social.youtube -%}<li><a rel="me" href="https://www.youtube.com/{{ social.youtube | cgi_escape | escape }}" title="{{ social.youtube | escape }}"><svg class="svg-icon grey"><use xlink:href="{{ '/assets/minima-social-icons.svg#youtube' | relative_url }}"></use></svg></a></li>{%- endif -%}
   {%- if social.youtube_channel -%}
     <li>
