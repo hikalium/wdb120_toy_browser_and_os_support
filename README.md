@@ -13,10 +13,10 @@
 誌面および本ページ内では、各コマンドの前に、どの環境でそのコマンドを実行するべきなのかわかるよう、プロンプトをつけている場合があります。
 
 ```
-$ something # 通常のLinuxホスト上で実行するコマンド
-(host)$ something # ホスト上であることを明確にしたいときには
-(liumos)$ something # liumOS上で実行するコマンド
-(liumos-builder)$ something # Dockerインスタンス上のシェルで実行するコマンド
+$ something                 # 通常のLinuxホスト上で実行するコマンド
+(host)$ something           # ホスト上で実行することを明確にしたい場合
+(liumos)$ something         # liumOS上で実行するコマンド
+(liumos-builder)$ something # Dockerインスタンス上のLinuxで実行するコマンド
 ```
 
 このシェル（`$`以前）の部分は実際には入力する必要はありません。
