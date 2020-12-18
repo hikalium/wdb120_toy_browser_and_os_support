@@ -6,6 +6,8 @@
 
 本ページの内容に関するお問い合わせは、著者である[@hikalium](https://github.com/hikalium)および[@d0iasm](https://github.com/d0iasm)までお願いします。
 
+<span style="color:red">先行販売などで発売日(12/24)よりも前にこのサイトを閲覧しているみなさまへ: 一部未完成なところがありますが、発売日までには完成しますので、どうかご了承ください。</span>
+
 <h2><a href="#experiments">掲載されているコマンドの実行例</a></h2>
 
 TBA(ここにコマンドと画像を貼る)
