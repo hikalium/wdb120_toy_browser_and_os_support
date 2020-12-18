@@ -133,8 +133,7 @@ ICMP packet recieved from 10.0.2.2 ICMP Type = 0
 - `httpclient.bin`
   - [app/httpclient/httpclient.c](https://github.com/hikalium/liumos/blob/master/app/httpclient/httpclient.c)
 
-
-liumOS上の`httpclient.bin`と、Linux上の`httpserver.bin`の通信
+#### liumOS上の`httpclient.bin`と、Linux上の`httpserver.bin`の通信
 
 ```sh
 (host) make run_docker
@@ -148,17 +147,29 @@ liumOS上の`httpclient.bin`と、Linux上の`httpserver.bin`の通信
 (liumOS:app/httpclient) httpclient.bin --ip 10.0.2.2 --port 8888 --path /index.html
 ```
 
-Linux上の`httpclient.bin`と、liumOS上の`httpserver.bin`の通信
+#### Linux上の`httpclient.bin`と、liumOS上の`httpserver.bin`の通信
 
 ```sh
 // server
 (host) telnet localhost 1235
-(liumOS) httpserver.bin --port 8889
+(liumOS) httpserver.bin --port 8888
 
 // client
 (host) docker exec -it liumos-builder0 /bin/bash
-(liumos-builder0) /liumos/app/httpclient/httpclient.bin --ip 127.0.0.1 --port 8889 --path /index.html
+(liumos-builder0) /liumos/app/httpclient/httpclient.bin --ip 127.0.0.1 --port 8888 --path /index.html
 ```
+
+#### ローカルのLinux環境で試す場合
+
+```sh
+// server
+$ ./httpserver.bin --port 8888
+
+// client
+$ ./httpclient.bin --ip 127.0.0.1 --port 8888 --path /index.html
+```
+
+もし、ポート番号が他のアプリケーションですでに使用されていると、`Error: Failed to bind a socket`というメッセージが出ます。その場合は`--port`で指定するポート番号を変えてください。
 
 <h3 id="ch5"><a href="#ch5">第5章</a></h3>
 
@@ -172,9 +183,10 @@ Linux上の`httpclient.bin`と、liumOS上の`httpserver.bin`の通信
 - - `httpserver.bin`
   - [app/httpserver/httpserver.c](https://github.com/hikalium/liumos/blob/master/app/httpserver/httpserver.c): 第4章で使用したものと同じ。
 
-liumOS上の`browser.bin`と、Linux上の`httpserver.bin`の通信
+#### liumOS上のブラウザとLinux上のサーバで試す場合
 
 ```sh
+// run docker
 (host) make run_docker
 
 // server
@@ -191,13 +203,25 @@ liumOS上の`browser.bin`と、Linux上の`httpserver.bin`の通信
 - `browser.bin --url http://10.0.2.2:8888/page2.html`
 - `browser.bin --url http://10.0.2.2:8888/not_exist.html`
 
+#### ローカルのLinux環境で試す場合
+
+```sh
+// server
+$ ./httpserver.bin --port 8888
+
+// client
+$ ./browser.bin --url http://127.0.0.1:8888/index.html
+```
+
+もし、ポート番号が他のアプリケーションですでに使用されていると、`Error: Failed to bind a socket`というメッセージが出ます。その場合は`--port`で指定するポート番号を変えてください。
+
 ## 既知の問題
 
 ### Docker上でping.binが動作しない
 
 ```
 $ docker exec -it liumos-builder0 /bin/bash
-(liumos-builder)$ app/ping/ping.bin 8.8.8.8 
+(liumos-builder)$ app/ping/ping.bin 8.8.8.8
 Ping to 8.8.8.8...
 socket() failed
 ```
