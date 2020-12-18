@@ -8,20 +8,34 @@
 
 <span style="color:red">先行販売などで発売日(12/24)よりも前にこのサイトを閲覧しているみなさまへ: 一部未完成なところがありますが、発売日までには完成しますので、どうかご了承ください。</span>
 
+<h2><a href="#notation">プロンプトの表記について</a></h2>
+
+誌面および本ページ内では、各コマンドの前に、どの環境でそのコマンドを実行するべきなのかわかるよう、プロンプトをつけている場合があります。
+
+```
+$ something # 通常のLinuxホスト上で実行するコマンド
+(host)$ something # ホスト上であることを明確にしたいときには
+(liumos)$ something # liumOS上で実行するコマンド
+(liumos-builder)$ something # Dockerインスタンス上のシェルで実行するコマンド
+```
+
+このシェル（`$`以前）の部分は実際には入力する必要はありません。
+
 <h2><a href="#sections">各章ごとの補足</a></h2>
 
 <h3 id="prerequisites"><a href="#prerequisites">事前準備</a></h3>
 
 liumOSのレポジトリは[github:hikalium/liumos](https://github.com/hikalium/liumos)から取得することができます。
 
-以下の各コマンドについては、[wdb_120](https://github.com/hikalium/liumos/tree/wdb_120)ブランチで動作することを確認しています。
-
-Docker環境の外でアプリケーションやOSをビルドする場合には、[README.md](https://github.com/hikalium/liumos/blob/wdb_120/README.md)に記載の環境構築を事前に行ってください。
-
-
 ```bash
 (host) git clone https://github.com/hikalium/liumos.git
 ```
+
+以下の各コマンドについては、[wdb_120](https://github.com/hikalium/liumos/tree/wdb_120)ブランチで動作することを確認しています。
+
+環境構築の手間を省くため、Dockerを利用する方法を誌面では説明しています。Dockerのインストール手順については[公式ページの情報](https://docs.docker.com/engine/install/)をご参照ください。
+
+Docker環境の外でアプリケーションやOSをビルドする場合には、[README.md](https://github.com/hikalium/liumos/blob/wdb_120/README.md)に記載の環境構築を事前に行ってください。
 
 <h3 id="ch1"><a href="#ch1">第1章</a></h3>
 
