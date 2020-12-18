@@ -108,20 +108,20 @@ ICMP packet recieved from 10.0.2.2 ICMP Type = 0
 
 (liumos) udpclient.bin -> (Linux) udpserver.bin
 ```
-(host) make run_docker
-(host) docker exec -it liumos-builder0 /bin/bash
-(liumos-builder)  app/udpserver/udpserver.bin 8888
-(host) telnet localhost 1235
-(liumos) udpclient.bin 10.0.2.2 8888 Hello!
+(host)$ make run_docker
+(host)$ docker exec -it liumos-builder0 /bin/bash
+(liumos-builder)$  app/udpserver/udpserver.bin 8888
+(host)$ telnet localhost 1235
+(liumos)$ udpclient.bin 10.0.2.2 8888 Hello!
 ```
 
-(liumos) udpserver.bin <- (Linux) udpclient.bin
+(liumos)$ udpserver.bin <- (Linux) udpclient.bin
 ```
-(host) make run_docker
-(host) docker exec -it liumos-builder0 /bin/bash
-(host) telnet localhost 1235
-(serial) udpserver.bin 8889
-(liumos-builder) app/udpclient/udpclient.bin 127.0.0.1 8889 hello
+(host)$ make run_docker
+(host)$ docker exec -it liumos-builder0 /bin/bash
+(host)$ telnet localhost 1235
+(serial)$ udpserver.bin 8889
+(liumos-builder)$ app/udpclient/udpclient.bin 127.0.0.1 8889 hello
 ```
 
 <h3 id="ch4"><a href="#ch4">第4章</a></h3>
@@ -136,27 +136,27 @@ ICMP packet recieved from 10.0.2.2 ICMP Type = 0
 #### liumOS上の`httpclient.bin`と、Linux上の`httpserver.bin`の通信
 
 ```sh
-(host) make run_docker
+(host)$ make run_docker
 
 // server
-(host) docker exec -it liumos-builder0 /bin/bash
-(liumos-builder0) /liumos/app/httpserver/httpserver.bin --port 8888
+(host)$ docker exec -it liumos-builder0 /bin/bash
+(liumos-builder)$ /liumos/app/httpserver/httpserver.bin --port 8888
 
 // client
-(host) telnet localhost 1235
-(liumOS:app/httpclient) httpclient.bin --ip 10.0.2.2 --port 8888 --path /index.html
+(host)$ telnet localhost 1235
+(liumos)$ httpclient.bin --ip 10.0.2.2 --port 8888 --path /index.html
 ```
 
 #### Linux上の`httpclient.bin`と、liumOS上の`httpserver.bin`の通信
 
 ```sh
 // server
-(host) telnet localhost 1235
-(liumOS) httpserver.bin --port 8888
+(host)$ telnet localhost 1235
+(liumos)$ httpserver.bin --port 8888
 
 // client
-(host) docker exec -it liumos-builder0 /bin/bash
-(liumos-builder0) /liumos/app/httpclient/httpclient.bin --ip 127.0.0.1 --port 8888 --path /index.html
+(host)$ docker exec -it liumos-builder0 /bin/bash
+(liumos-builder)$ /liumos/app/httpclient/httpclient.bin --ip 127.0.0.1 --port 8888 --path /index.html
 ```
 
 #### ローカルのLinux環境で試す場合
@@ -187,15 +187,15 @@ $ ./httpclient.bin --ip 127.0.0.1 --port 8888 --path /index.html
 
 ```sh
 // run docker
-(host) make run_docker
+(host)$ make run_docker
 
 // server
-(host) docker exec -it liumos-builder0 /bin/bash
-(liumos-builder0) /liumos/app/httpserver/httpserver.bin --port 8888
+(host)$ docker exec -it liumos-builder0 /bin/bash
+(liumos-builder)$ /liumos/app/httpserver/httpserver.bin --port 8888
 
 // client
-(host) telnet localhost 1235
-(liumOS:app/browser) browser.bin --url http://10.0.2.2:8888/index.html
+(host)$ telnet localhost 1235
+(liumos)$ browser.bin --url http://10.0.2.2:8888/index.html
 ```
 
 その他のURLを使用した`browser.bin`のコマンド
