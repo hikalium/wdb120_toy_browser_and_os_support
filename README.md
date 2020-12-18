@@ -125,7 +125,71 @@ ICMP packet recieved from 10.0.2.2 ICMP Type = 0
 ```
 
 <h3 id="ch4"><a href="#ch4">第4章</a></h3>
+
+第4章で使用するソースコードは以下の通りです。
+
+- `httpserver.bin`
+  - [app/httpserver/httpserver.c](https://github.com/hikalium/liumos/blob/master/app/httpserver/httpserver.c)
+- `httpclient.bin`
+  - [app/httpclient/httpclient.c](https://github.com/hikalium/liumos/blob/master/app/httpclient/httpclient.c)
+
+
+liumOS上の`httpclient.bin`と、Linux上の`httpserver.bin`の通信
+
+```sh
+(host) make run_docker
+
+// server
+(host) docker exec -it liumos-builder0 /bin/bash
+(liumos-builder0) /liumos/app/httpserver/httpserver.bin --port 8888
+
+// client
+(host) telnet localhost 1235
+(liumOS:app/httpclient) httpclient.bin --ip 10.0.2.2 --port 8888 --path /index.html
+```
+
+Linux上の`httpclient.bin`と、liumOS上の`httpserver.bin`の通信
+
+```sh
+// server
+(host) telnet localhost 1235
+(liumOS) httpserver.bin --port 8889
+
+// client
+(host) docker exec -it liumos-builder0 /bin/bash
+(liumos-builder0) /liumos/app/httpclient/httpclient.bin --ip 127.0.0.1 --port 8889 --path /index.html
+```
+
 <h3 id="ch5"><a href="#ch5">第5章</a></h3>
+
+第5章で使用するソースコードは以下の通りです。
+
+- `browser.bin`
+  - [app/browser/browser.c](https://github.com/hikalium/liumos/blob/master/app/browser/browser.c): コマンドライン引数やURLをパースしたり、HTTPクライアントの役割をする。`main`関数を含む。
+  - [app/browser/tokenize.c](https://github.com/hikalium/liumos/blob/master/app/browser/tokenize.c): HTML文字列のトークナイズを行う。
+  - [app/browser/parse.c](https://github.com/hikalium/liumos/blob/master/app/browser/parse.c): トークン列からツリーを構築する。
+  - [app/browser/rendering.c](https://github.com/hikalium/liumos/blob/master/app/browser/rendering.c): ツリーを走査してMarkdownを出力する。
+- - `httpserver.bin`
+  - [app/httpserver/httpserver.c](https://github.com/hikalium/liumos/blob/master/app/httpserver/httpserver.c): 第4章で使用したものと同じ。
+
+liumOS上の`browser.bin`と、Linux上の`httpserver.bin`の通信
+
+```sh
+(host) make run_docker
+
+// server
+(host) docker exec -it liumos-builder0 /bin/bash
+(liumos-builder0) /liumos/app/httpserver/httpserver.bin --port 8888
+
+// client
+(host) telnet localhost 1235
+(liumOS:app/browser) browser.bin --url http://10.0.2.2:8888/index.html
+```
+
+その他のURLを使用した`browser.bin`のコマンド
+- `browser.bin --url http://10.0.2.2:8888/page1.html`
+- `browser.bin --url http://10.0.2.2:8888/page2.html`
+- `browser.bin --url http://10.0.2.2:8888/not_exist.html`
 
 ## 既知の問題
 
