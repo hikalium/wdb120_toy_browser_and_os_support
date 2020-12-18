@@ -145,8 +145,10 @@ socket() failed
 
 <h2><a href="#author">Author</a></h2>
 
-- 第1章-第3章: [@hikalium](https://github.com/hikalium)
-- 第4章-第5章: [@d0iasm](https://github.com/d0iasm)
+- 第1章-第3章
+  - [@hikalium](https://github.com/hikalium)
+- 第4章-第5章
+  - [@d0iasm](https://github.com/d0iasm)
 
 <h2><a href="#license">License</a></h2>
 
