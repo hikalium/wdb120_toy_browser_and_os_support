@@ -8,17 +8,126 @@
 
 <span style="color:red">先行販売などで発売日(12/24)よりも前にこのサイトを閲覧しているみなさまへ: 一部未完成なところがありますが、発売日までには完成しますので、どうかご了承ください。</span>
 
-<h2><a href="#sections">各章ごとの追加情報</a></h2>
+<h2><a href="#sections">各章ごとの補足</a></h2>
 
-<h2><a href="#experiments">掲載されているコマンドの実行例</a></h2>
+<h3 id="prerequisites"><a href="#prerequisites">事前準備</a></h3>
 
-TBA(ここにコマンドと画像を貼る)
+liumOSのレポジトリは[github:hikalium/liumos](https://github.com/hikalium/liumos)から取得することができます。
+
+以下の各コマンドについては、[wdb_120](https://github.com/hikalium/liumos/tree/wdb_120)ブランチで動作することを確認しています。
+
+Docker環境の外でアプリケーションやOSをビルドする場合には、[README.md](https://github.com/hikalium/liumos/blob/wdb_120/README.md)に記載の環境構築を事前に行ってください。
+
+
+```bash
+(host) git clone https://github.com/hikalium/liumos.git
+```
+
+<h3 id="ch1"><a href="#ch1">第1章</a></h3>
+
+<h3 id="ch2"><a href="#ch2">第2章</a></h3>
+
+この章で実装する`ping.bin`のソースコードは[app/ping/ping.c](https://github.com/hikalium/liumos/tree/wdb_120/app/ping/ping.c)から確認できます。
+
+liumOS上で動作確認をしたい場合は
 
 ```
-command test 
-this is a test
-#include <something>
+(host) make run_docker
 ```
+
+を実行してliumOSを起動します。初回起動時は、Dockerコンテナのイメージをダウンロードするため、多少時間がかかりますが、次回以降は数秒で完了します。
+
+次に、起動したliumOSのシリアルコンソールに、以下のコマンドでアタッチします。
+
+```
+(host) telnet localhost 1235
+```
+
+接続した直後はプロンプトが見えませんが、Enterキーを押すと以下のようにプロンプトが出てくるはずです。（出ない場合は自作OSの起動に失敗している可能性がありますので、再度`make run_docker`を実行してください。）
+
+```
+$ telnet localhost 1235
+Trying ::1...
+Connected to localhost.
+Escape character is '^]'.
+# ここでEnterキーを押す
+
+Not a command or file: 
+(liumos)$ # プロンプトが出てきた
+```
+
+その後、pingコマンドを実行してみます。
+
+```
+(liumos)$ ping.bin 10.0.2.2
+ping.bin 10.0.2.2
+Ping to 10.0.2.2...
+kernel: sys_socket: socket (fd=3) created (IPv4, DGRAM, ICMP)
+kernel: dst is in the same subnet.
+kernel: ARP request sent to 10.0.2.2...
+kernel: ARP entry found!
+recvfrom returned: 8
+00 00 FF FF 00 00 00 00 
+ICMP packet recieved from 10.0.2.2 ICMP Type = 0
+```
+
+うまくいかない場合は、一度すべてのシェルを閉じて、最初の`make run_docker`のステップからやり直してみてください。
+
+
+<h3 id="ch3"><a href="#ch3">第3章</a></h3>
+
+この章で言及するソースコードの全体像は、下記から確認できます。
+
+- `udpserver.bin`
+  - [app/udpserver/udpserver.c](https://github.com/hikalium/liumos/blob/wdb_120/app/udpserver/udpserver.c)
+- `udpclient.bin`
+  - [app/udpclient/udpclient.c](https://github.com/hikalium/liumos/blob/wdb_120/app/udpclient/udpclient.c)
+- システムコールハンドラの実装
+  - [src/syscall.cc](https://github.com/hikalium/liumos/blob/wdb_120/src/syscall.cc)
+- virtio-netドライバの実装
+  - [src/virtio_net.cc](https://github.com/hikalium/liumos/blob/wdb_120/src/virtio_net.cc)
+  - [src/virtio_net.h](https://github.com/hikalium/liumos/blob/wdb_120/src/virtio_net.h)
+- ネットワーク関連の実装（本文では触れていないが参考までに）
+  - [src/network.cc](https://github.com/hikalium/liumos/blob/wdb_120/src/network.cc)
+  - [src/network.h](https://github.com/hikalium/liumos/blob/wdb_120/src/network.h)
+
+
+(liumos) udpclient.bin -> (Linux) udpserver.bin
+```
+(host) make run_docker
+(host) docker exec -it liumos-builder0 /bin/bash
+(liumos-builder)  app/udpserver/udpserver.bin 8888
+(host) telnet localhost 1235
+(liumos) udpclient.bin 10.0.2.2 8888 Hello!
+```
+
+(liumos) udpserver.bin <- (Linux) udpclient.bin
+```
+(host) make run_docker
+(host) docker exec -it liumos-builder0 /bin/bash
+(host) telnet localhost 1235
+(serial) udpserver.bin 8889
+(liumos-builder) app/udpclient/udpclient.bin 127.0.0.1 8889 hello
+```
+
+<h3 id="ch4"><a href="#ch4">第4章</a></h3>
+<h3 id="ch5"><a href="#ch5">第5章</a></h3>
+
+## 既知の問題
+
+### Docker上でping.binが動作しない
+
+```
+$ docker exec -it liumos-builder0 /bin/bash
+(liumos-builder)$ app/ping/ping.bin 8.8.8.8 
+Ping to 8.8.8.8...
+socket() failed
+```
+
+おそらく筆者が用意したDocker環境の問題です。解決策が見つかり次第修正します。
+
+それまでは、Linux環境でDockerを使わずにliumOSの環境を整備して直接ビルドして実験するか、Linux上で動くかどうかのテストはスキップして、自作OS上でping.binを実行してみてください。(自作OS上で動かす方が簡単だなんて不思議ですね…。)
+
 
 <h2><a href="#author">Author</a></h2>
 
