@@ -160,6 +160,39 @@ Linux上の`httpclient.bin`と、liumOS上の`httpserver.bin`の通信
 (liumos-builder0) /liumos/app/httpclient/httpclient.bin --ip 127.0.0.1 --port 8889 --path /index.html
 ```
 
+#### 訂正
+
+第4章でHTTPサーバを実装するさいのリクエストを待ち受けるコードに間違いがありました。`address`変数を`bind()`する必要があります。
+
+間違い（誌面）
+
+```c
+address.sin_family = AF_INET;
+address.sin_addr.s_addr = INADDR_ANY;
+address.sin_port = htons(port);
+
+recvfrom(socket_fd, request, SIZE_REQUEST, 0,
+         (struct sockaddr*) &address, &addrlen);
+```
+
+訂正
+
+```c
+address.sin_family = AF_INET;
+address.sin_addr.s_addr = INADDR_ANY;
+address.sin_port = htons(port);
+
+// 訂正箇所: bind関数によって、address変数の情報とsocketを結びつける必要があります。
+if (bind(socket_fd, (struct sockaddr *) &address, addrlen) < 0) {
+  Println("Error: Failed to bind a socket");
+  exit(EXIT_FAILURE);
+}
+
+// 補足: recvfrom関数によってaddress変数はクライアントの情報へと上書きされます。後にsendto関数によってクライアントへレスポンスを送る際にaddress変数を再度使用します。
+recvfrom(socket_fd, request, SIZE_REQUEST, 0,
+         (struct sockaddr*) &address, &addrlen);
+```
+
 <h3 id="ch5"><a href="#ch5">第5章</a></h3>
 
 第5章で使用するソースコードは以下の通りです。
