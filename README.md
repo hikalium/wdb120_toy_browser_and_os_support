@@ -265,6 +265,13 @@ socket() failed
 
 それまでは、Linux環境でDockerを使わずにliumOSの環境を整備して直接ビルドして実験するか、Linux上で動くかどうかのテストはスキップして、自作OS上でping.binを実行してみてください。(自作OS上で動かす方が簡単だなんて不思議ですね…。)
 
+### `Virtio::Net not initialized yet`というエラーでOSが起動しないんだけど…
+
+自作OS側のバグで、現在修正中です。
+
+https://github.com/hikalium/liumos/issues/54
+
+再起動すれば多くの場合でうまくいくはずです。お手数をおかけしますが、もう一度お試しください。（もしくは、自作OSのデバッグの大変さを味わうというのもまた一興でしょう。）
 
 <h2><a href="#author">Author</a></h2>
 
