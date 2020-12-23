@@ -2,7 +2,7 @@
 
 <h2><a href="#about">About</a></h2>
 
-このページは、Web+DB Press Vol.120 に掲載されている記事「自作OS×自作ブラウザで学ぶ Webページが表示されるまで」に関する補足情報をまとめたページです。
+このページは、[Web+DB Press Vol.120](https://gihyo.jp/magazine/wdpress/archive/2021/vol120)に掲載されている記事「自作OS×自作ブラウザで学ぶ Webページが表示されるまで」に関する補足情報をまとめたページです。
 
 本ページの内容に関するお問い合わせは、著者である[@hikalium](https://github.com/hikalium)および[@d0iasm](https://github.com/d0iasm)まで、[Issues](https://github.com/hikalium/wdb120_toy_browser_and_os_support/issues)経由でお願いします。
 
