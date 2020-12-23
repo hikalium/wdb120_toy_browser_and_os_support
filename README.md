@@ -1,12 +1,12 @@
 <h1>自作OS×自作ブラウザで学ぶ<br>Webページが表示されるまで<br><small>サポートページ</small></h1>
 
-<h2><a href="#about">About</a></h2>
+<h2 id="about"><a href="#about">About</a></h2>
 
 このページは、[Web+DB Press Vol.120](https://gihyo.jp/magazine/wdpress/archive/2021/vol120)に掲載されている記事「自作OS×自作ブラウザで学ぶ Webページが表示されるまで」に関する補足情報をまとめたページです。
 
 本ページの内容に関するお問い合わせは、著者である[@hikalium](https://github.com/hikalium)および[@d0iasm](https://github.com/d0iasm)まで、[Issues](https://github.com/hikalium/wdb120_toy_browser_and_os_support/issues)経由でお願いします。
 
-<h2><a href="#notation">プロンプトの表記について</a></h2>
+<h2 id="notation"><a href="#notation">プロンプトの表記について</a></h2>
 
 誌面および本ページ内では、各コマンドの前に、どの環境でそのコマンドを実行するべきなのかわかるよう、プロンプトをつけている場合があります。
 
@@ -19,7 +19,7 @@ $ something                 # 通常のLinuxホスト上で実行するコマン
 
 このシェル（`$`以前）の部分は実際には入力する必要はありません。
 
-<h2><a href="#sections">各章ごとの補足</a></h2>
+<h2 id="sections"><a href="#sections">各章ごとの補足</a></h2>
 
 <h3 id="prerequisites"><a href="#prerequisites">事前準備</a></h3>
 
@@ -36,6 +36,10 @@ liumOSのレポジトリは[github:hikalium/liumos](https://github.com/hikalium/
 Docker環境の外でアプリケーションやOSをビルドする場合には、[README.md](https://github.com/hikalium/liumos/blob/wdb_120/README.md)に記載の環境構築を事前に行ってください。
 
 <h3 id="ch1"><a href="#ch1">第1章</a></h3>
+
+Dockerのインストールについては[事前準備](#prerequisites)を参照してください。
+
+Dockerなしで実験したい場合には、README.mdの[Setup tap interface (for linux)](https://github.com/hikalium/liumos#setup-tap-interface-for-linux)の項に記載の手順で設定を行ってください。ただし、この方法はコンピューターのネットワーク設定を変更するため、特にリモートマシンで試される際には細心の注意を払って行ってください。
 
 <h3 id="ch2"><a href="#ch2">第2章</a></h3>
 
