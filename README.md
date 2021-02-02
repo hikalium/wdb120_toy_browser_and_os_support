@@ -4,6 +4,8 @@
 
 このページは、[Web+DB Press Vol.120](https://gihyo.jp/magazine/wdpress/archive/2021/vol120)に掲載されている記事「自作OS×自作ブラウザで学ぶ Webページが表示されるまで」に関する補足情報をまとめたページです。
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Ge7RjJFy9gE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 本ページの内容に関するお問い合わせは、著者である[@hikalium](https://github.com/hikalium)および[@d0iasm](https://github.com/d0iasm)まで、[Issues](https://github.com/hikalium/wdb120_toy_browser_and_os_support/issues)経由でお願いします。
 
 <h2 id="notation"><a href="#notation">プロンプトの表記について</a></h2>
